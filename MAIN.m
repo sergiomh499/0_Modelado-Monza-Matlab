@@ -14,7 +14,7 @@ global control_fuzzy;
 % Lectura del controlador
 control_fuzzy = readfis('controlFPI2');
 % control_fuzzy = readfis('NeuroController');
-load('nivel4_train_net.mat');
+load('train_net4.mat');
 
 % Inicializacion variables
 theta = 0;
@@ -35,7 +35,7 @@ g = 9.81;
 % Establecer comportamiento de ODE
 options1 = odeset(  'RelTol',1e-4,...
                     'AbsTol', 1e-6,...
-                    'MaxStep',0.05,...
+                    'MaxStep',0.01,...
                     'Events', @EventoChoque);
                 
 options2 = odeset(  'RelTol',1e-4,...
@@ -68,34 +68,34 @@ while 1
         
         % CONTROLADOR
 %         condIni(5) = controlador(condIni);
-%         condIni(5) = net(X(end,1:4)');
+        condIni(5) = net(real(X(end,1:4))');
         
-        % ----------------------------------------------
-        % Control manual
-        figure(1);
-        [xpar, ypar, xcir, ycir] = generarMapa(nivel, X(end,5));
-        for i = 1:7
-            plot(xpar{i},ypar{i},'k');
-            hold on
-        end
-        plot(xcir,ycir{1},'k');
-        plot(xcir,ycir{2},'k');
-        plot(X(end,1),X(end,3),'or');
-        hold off
-        
-       aux_inc_theta1 = input('Theta:[1 o 0] ');
-       if isempty(aux_inc_theta1)
-           aux_inc_theta1 = aux_inc_theta2;
-       else
-           if aux_inc_theta1 == 0
-               condIni(5) = condIni(5) - pi/2/10;
-               aux_inc_theta2 = aux_inc_theta1;
-           elseif aux_inc_theta1 == 1
-               condIni(5) = condIni(5) + pi/2/10;
-               aux_inc_theta2 = aux_inc_theta1;
-           end
-       end
-        % ----------------------------------------------
+%         % ----------------------------------------------
+%         % Control manual
+%         figure(1);
+%         [xpar, ypar, xcir, ycir] = generarMapa(nivel, X(end,5));
+%         for i = 1:7
+%             plot(xpar{i},ypar{i},'k');
+%             hold on
+%         end
+%         plot(xcir,ycir{1},'k');
+%         plot(xcir,ycir{2},'k');
+%         plot(X(end,1),X(end,3),'or');
+%         hold off
+%         
+%        aux_inc_theta1 = input('Theta:[1 o 0] ');
+%        if isempty(aux_inc_theta1)
+%            aux_inc_theta1 = aux_inc_theta2;
+%        else
+%            if aux_inc_theta1 == 0
+%                condIni(5) = condIni(5) - pi/2/20;
+%                aux_inc_theta2 = aux_inc_theta1;
+%            elseif aux_inc_theta1 == 1
+%                condIni(5) = condIni(5) + pi/2/20;
+%                aux_inc_theta2 = aux_inc_theta1;
+%            end
+%        end
+%         % ----------------------------------------------
 
         [taux,xaux] = ode45(@SistemaCaida,[0 h],condIni,options1);
         tau = taux(end) - taux(1);
@@ -162,34 +162,34 @@ while 1
         
         % CONTROLADOR
 %         xaux(end,5) = controlador(xaux(end,:));
-%         xaux(end,5) = net(X(end,1:4)');
+        xaux(end,5) = net(real(X(end,1:4))');
 
-% ----------------------------------------------
-        % Control manual
-        figure(1);
-        [xpar, ypar, xcir, ycir] = generarMapa(nivel, X(end,5));
-        for i = 1:7
-            plot(xpar{i},ypar{i},'k');
-            hold on
-        end
-        plot(xcir,ycir{1},'k');
-        plot(xcir,ycir{2},'k');
-        plot(X(end,1),X(end,3),'or');
-        hold off
-        
-        aux_inc_theta1 = input('Theta:[1 o 0] ');
-        if isempty(aux_inc_theta1)
-            aux_inc_theta1 = aux_inc_theta2;
-        else
-            if aux_inc_theta1 == 0
-                xaux(end,5) = condIni(5) - pi/2/10;
-                aux_inc_theta2 = aux_inc_theta1;
-            elseif aux_inc_theta1 == 1
-                xaux(end,5) = condIni(5) + pi/2/10;
-                aux_inc_theta2 = aux_inc_theta1;
-            end
-        end
-        % ----------------------------------------------
+%         % ----------------------------------------------
+%         % Control manual
+%         figure(1);
+%         [xpar, ypar, xcir, ycir] = generarMapa(nivel, X(end,5));
+%         for i = 1:7
+%             plot(xpar{i},ypar{i},'k');
+%             hold on
+%         end
+%         plot(xcir,ycir{1},'k');
+%         plot(xcir,ycir{2},'k');
+%         plot(X(end,1),X(end,3),'or');
+%         hold off
+%         
+%         aux_inc_theta1 = input('Theta:[1 o 0] ');
+%         if isempty(aux_inc_theta1)
+%             aux_inc_theta1 = aux_inc_theta2;
+%         else
+%             if aux_inc_theta1 == 0
+%                 xaux(end,5) = condIni(5) - pi/2/20;
+%                 aux_inc_theta2 = aux_inc_theta1;
+%             elseif aux_inc_theta1 == 1
+%                 xaux(end,5) = condIni(5) + pi/2/20;
+%                 aux_inc_theta2 = aux_inc_theta1;
+%             end
+%         end
+%         % ----------------------------------------------
 
         
         x1 = xaux(end,1);
