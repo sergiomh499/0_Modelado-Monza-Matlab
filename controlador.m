@@ -37,7 +37,7 @@ switch tipo_control
 %         sumaE = real(se*tau);
 %         x(1) = real(x(1));
 %         theta = evalfis(control_fuzzy, [x(1) sumaE]);
-        theta = evalfis(control_fuzzy, [x(1),x(2),x(3),x(4)]);
+        theta = evalfis(control_fuzzy, real([x(1),x(2),x(3),x(4)]));
         
     case 4 % Controlador algo
         

@@ -15,9 +15,7 @@ global control_fuzzy;
 % control_fuzzy = readfis('controlFPI2');
 control_fuzzy = readfis('fuzzy_control_net_2');
 % control_fuzzy = readfis('NeuroController');
-load('train_net10.mat');
-load('data_net.mat');
-X_data = 1*[x_input,x_output];
+load('train_net8.mat');
 
 % Inicializacion variables
 theta = 0;
@@ -28,7 +26,7 @@ e_ant = 0;
 
 % Parametros
 nivel = 3;
-condIni = [-0.1, 0, 0.16, 0, theta];
+condIni = [-0.075, 0, 0.16, 0, theta];
 g = 9.81;
 
 %% Generar mapa
@@ -70,8 +68,12 @@ while 1
         condIni = real([X(end,1),X(end,2),X(end,3),X(end,4),X(end,5)]);
         
         % CONTROLADOR
-        condIni(5) = controlador(condIni);
-%         condIni(5) = net(real([X(end,1);X(end,2);X(end,3);X(end,4)]));
+%         condIni(5) = controlador(condIni);
+        xprima = X(end,1)*cos(theta) + X(end,3)*sin(theta);
+        yprima = -X(end,1)*sin(theta) + X(end,3)*cos(theta);
+        dxprima = X(end,2)*cos(theta) + X(end,4)*sin(theta);
+        dyprima = -X(end,2)*cos(theta) + X(end,4)*sin(theta);
+        condIni(5) = net(real([xprima;dxprima;yprima;dyprima]));
         
 %         % ----------------------------------------------
 %         % Control manual
@@ -120,10 +122,10 @@ while 1
 
     % Establecemos condiciones tras choque
     % Pasamos a coordenadas referenciales
-    xprima = X(end,1)*cos(theta) - X(end,3)*sin(theta);
-    yprima = X(end,1)*sin(theta) + X(end,3)*cos(theta);
-    dxprima = X(end,2)*cos(theta) - X(end,4)*sin(theta);
-    dyprima = X(end,2)*cos(theta) + X(end,4)*sin(theta);
+    xprima = X(end,1)*cos(theta) + X(end,3)*sin(theta);
+    yprima = -X(end,1)*sin(theta) + X(end,3)*cos(theta);
+    dxprima = X(end,2)*cos(theta) + X(end,4)*sin(theta);
+    dyprima = -X(end,2)*cos(theta) + X(end,4)*sin(theta);
 
     % Disminucion de la velocidad
     e = 0.2;
@@ -164,8 +166,12 @@ while 1
         tau = taux(end) - taux(1);
         
         % CONTROLADOR
-        xaux(end,5) = controlador(xaux(end,:));
-%         xaux(end,5) = net(real([X(end,1);X(end,2);X(end,3);X(end,4)]));
+%         xaux(end,5) = controlador(xaux(end,:));
+        xprima = X(end,1)*cos(theta) + X(end,3)*sin(theta);
+        yprima = -X(end,1)*sin(theta) + X(end,3)*cos(theta);
+        dxprima = X(end,2)*cos(theta) + X(end,4)*sin(theta);
+        dyprima = -X(end,2)*cos(theta) + X(end,4)*sin(theta);
+        xaux(end,5) = net(real([xprima;dxprima;yprima;dyprima]));
 
 %         % ----------------------------------------------
 %         % Control manual
