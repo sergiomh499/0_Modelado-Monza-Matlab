@@ -31,17 +31,16 @@ switch tipo_control
         se = se + x(1);
         theta = Kp*x(1) + Ki*se*tau + Kd*(x(1) - e_ant)/tau;
         
-    case 3 % Controlador Fuzzy
+    case 3 % Controlador Fuzzy FPID
         
-%         se = real(se + x(1));
-%         sumaE = real(se*tau);
-%         x(1) = real(x(1));
-%         theta = evalfis(control_fuzzy, [x(1) sumaE]);
+        se = real(se + x(1));
+        sumaE = real(se*tau);
+        x(1) = real(x(1));
+        theta = evalfis(control_fuzzy, [x(1) sumaE]);
+        
+    case 4 % Controlador neuro-fuzzy
+        
         theta = evalfis(control_fuzzy, [x(1),x(2),x(3),x(4)]);
-        
-    case 4 % Controlador algo
-        
-        theta = 0;
         
     otherwise
         return
