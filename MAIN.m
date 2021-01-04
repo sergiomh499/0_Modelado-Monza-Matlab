@@ -14,6 +14,7 @@ global control_fuzzy;
 % Lectura del controlador
 control_fuzzy = readfis('controlFPI2');
 % control_fuzzy = readfis('NeuroController');
+control_fuzzy = readfis('fuzzy_control_net_2');
 load('train_net4.mat');
 
 % Inicializacion variables
