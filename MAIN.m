@@ -27,7 +27,7 @@ se = 0;
 e_ant = 0;
 
 % Parametros
-nivel = 3;
+nivel = 1;
 condIni = [-0.1, 0, 0.16, 0, theta];
 g = 9.81;
 
