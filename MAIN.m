@@ -13,6 +13,10 @@ global control_fuzzy;
 
 % Lectura del controlador
 control_fuzzy = readfis('controlFPI2');
+<<<<<<< Updated upstream
+=======
+% control_fuzzy = readfis('fuzzy_control_net_2');
+>>>>>>> Stashed changes
 % control_fuzzy = readfis('NeuroController');
 control_fuzzy = readfis('fuzzy_control_net_2');
 load('train_net4.mat');
@@ -25,8 +29,13 @@ se = 0;
 e_ant = 0;
 
 % Parametros
+<<<<<<< Updated upstream
 nivel = 1;
 condIni = [-0.075, 0, 0.16, 0, theta];
+=======
+nivel = 4;
+condIni = [-0.1, 0, 0.16, 0, theta];
+>>>>>>> Stashed changes
 g = 9.81;
 
 %% Generar mapa
