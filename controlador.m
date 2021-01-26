@@ -1,6 +1,6 @@
 %% CONTROLADOR
 function theta = controlador(x)
-global parabola se e_ant tau control_fuzzy
+global parabola se e_ant tau control_fuzzy  theta
 
 tipo_control = 1;
 
