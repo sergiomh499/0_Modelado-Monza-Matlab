@@ -15,8 +15,14 @@ global control_fuzzy;
 control_fuzzy = readfis('controlFPI2');
 % control_fuzzy = readfis('fuzzy_control_net_2');
 % control_fuzzy = readfis('NeuroController');
+
 % control_fuzzy = readfis('fuzzy_control_net_2');
 % load('train_net4.mat');
+
+% load('train_net10.mat');
+% load('data_net.mat');
+% X_data = 1*[x_input,x_output];
+
 
 % Inicializacion variables
 theta = 0;

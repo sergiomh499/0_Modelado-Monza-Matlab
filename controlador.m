@@ -10,15 +10,27 @@ switch tipo_control
         
         if mod(parabola,2) == 1
             if x(1) > 0
-                theta = 2*x(1);
+              
+                theta = 1.4*x(1);
+             
             else
-                theta = 5.5*x(1);
+                t2=theta;
+                theta = 4*x(1);
+                if abs(t2-theta)>0.08
+                    theta=(theta+t2)/2;
+                   
+                end
             end
         else
             if x(1) < 0
-                theta = 2*x(1);
+                theta = 1.4*x(1);
             else
-                theta = 5.5*x(1);
+                 t2=theta;
+                theta = 4*x(1);
+                if abs(t2-theta)>0.08
+                    theta=(t2+theta)/2;
+                  
+                end
             end
         end
         
