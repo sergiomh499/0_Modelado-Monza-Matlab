@@ -11,10 +11,12 @@ global value;
 global se tau e_ant;
 global control_fuzzy;
 
-% Lectura del controlador
-% control_fuzzy = readfis('controlFPI2');
+% Lectura del controlador fuzzy
+control_fuzzy = readfis('controlFPI2');
+
+% Lectura del controlador neuronal
 control_fuzzy = readfis('fuzzy_control_net_2');
-% control_fuzzy = readfis('NeuroController');
+control_fuzzy = readfis('NeuroController');
 load('train_net10.mat');
 load('data_net.mat');
 X_data = 1*[x_input,x_output];

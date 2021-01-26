@@ -2,7 +2,7 @@
 function theta = controlador(x)
 global parabola se e_ant tau control_fuzzy  theta
 
-tipo_control = 1;
+tipo_control = 4;
 
 switch tipo_control
     
@@ -45,10 +45,10 @@ switch tipo_control
         
     case 3 % Controlador Fuzzy
         
-%         se = real(se + x(1));
-%         sumaE = real(se*tau);
-%         x(1) = real(x(1));
-%         theta = evalfis(control_fuzzy, [x(1) sumaE]);
+        se = real(se + x(1));
+        sumaE = real(se*tau);
+        x(1) = real(x(1));
+        theta = evalfis(control_fuzzy, [x(1) sumaE]);
         
     case 4 % Controlador neuro-fuzzy
         
