@@ -11,16 +11,8 @@ global value;
 global se tau e_ant;
 global control_fuzzy;
 
-% Lectura del controlador
-% control_fuzzy = readfis('controlFPI2');
-control_fuzzy = readfis('fuzzy_control_net_2');
-% control_fuzzy = readfis('NeuroController');
-load('train_net10.mat');
-load('data_net.mat');
-X_data = 1*[x_input,x_output];
-
 % Inicializacion variables
-theta = 0;
+theta = -pi/10;
 t_ini = 0;
 t_fin = 10;
 se = 0;
@@ -70,35 +62,7 @@ while 1
         condIni = real([X(end,1),X(end,2),X(end,3),X(end,4),X(end,5)]);
         
         % CONTROLADOR
-        condIni(5) = controlador(condIni);
-%         condIni(5) = net(real([X(end,1);X(end,2);X(end,3);X(end,4)]));
-        
-%         % ----------------------------------------------
-%         % Control manual
-%         figure(1);
-%         [xpar, ypar, xcir, ycir] = generarMapa(nivel, X(end,5));
-%         for i = 1:7
-%             plot(xpar{i},ypar{i},'k');
-%             hold on
-%         end
-%         plot(xcir,ycir{1},'k');
-%         plot(xcir,ycir{2},'k');
-%         plot(X(end,1),X(end,3),'or');
-%         hold off
-%         
-%        aux_inc_theta1 = input('Theta:[1 o 0] ');
-%        if isempty(aux_inc_theta1)
-%            aux_inc_theta1 = aux_inc_theta2;
-%        else
-%            if aux_inc_theta1 == 0
-%                condIni(5) = condIni(5) - pi/2/20;
-%                aux_inc_theta2 = aux_inc_theta1;
-%            elseif aux_inc_theta1 == 1
-%                condIni(5) = condIni(5) + pi/2/20;
-%                aux_inc_theta2 = aux_inc_theta1;
-%            end
-%        end
-%         % ----------------------------------------------
+        condIni(5) = condIni(5);
 
         [taux,xaux] = ode45(@SistemaCaida,[0 h],condIni,options1);
         tau = taux(end) - taux(1);
@@ -164,36 +128,7 @@ while 1
         tau = taux(end) - taux(1);
         
         % CONTROLADOR
-        xaux(end,5) = controlador(xaux(end,:));
-%         xaux(end,5) = net(real([X(end,1);X(end,2);X(end,3);X(end,4)]));
-
-%         % ----------------------------------------------
-%         % Control manual
-%         figure(1);
-%         [xpar, ypar, xcir, ycir] = generarMapa(nivel, X(end,5));
-%         for i = 1:7
-%             plot(xpar{i},ypar{i},'k');
-%             hold on
-%         end
-%         plot(xcir,ycir{1},'k');
-%         plot(xcir,ycir{2},'k');
-%         plot(X(end,1),X(end,3),'or');
-%         hold off
-%         
-%         aux_inc_theta1 = input('Theta:[1 o 0] ');
-%         if isempty(aux_inc_theta1)
-%             aux_inc_theta1 = aux_inc_theta2;
-%         else
-%             if aux_inc_theta1 == 0
-%                 xaux(end,5) = condIni(5) - pi/2/20;
-%                 aux_inc_theta2 = aux_inc_theta1;
-%             elseif aux_inc_theta1 == 1
-%                 xaux(end,5) = condIni(5) + pi/2/20;
-%                 aux_inc_theta2 = aux_inc_theta1;
-%             end
-%         end
-%         % ----------------------------------------------
-
+        xaux(end,5) = condIni(5);
         
         x1 = xaux(end,1);
         x2 = xaux(end,2);
