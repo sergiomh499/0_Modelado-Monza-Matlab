@@ -13,13 +13,10 @@ global control_fuzzy;
 
 % Lectura del controlador
 control_fuzzy = readfis('controlFPI2');
-<<<<<<< Updated upstream
-=======
 % control_fuzzy = readfis('fuzzy_control_net_2');
->>>>>>> Stashed changes
 % control_fuzzy = readfis('NeuroController');
-control_fuzzy = readfis('fuzzy_control_net_2');
-load('train_net4.mat');
+% control_fuzzy = readfis('fuzzy_control_net_2');
+% load('train_net4.mat');
 
 % Inicializacion variables
 theta = 0;
@@ -29,13 +26,11 @@ se = 0;
 e_ant = 0;
 
 % Parametros
-<<<<<<< Updated upstream
+
 nivel = 1;
 condIni = [-0.075, 0, 0.16, 0, theta];
-=======
-nivel = 4;
-condIni = [-0.1, 0, 0.16, 0, theta];
->>>>>>> Stashed changes
+% nivel = 4;
+% condIni = [-0.1, 0, 0.16, 0, theta];
 g = 9.81;
 
 %% Generar mapa
@@ -77,8 +72,8 @@ while 1
         condIni = real([X(end,1),X(end,2),X(end,3),X(end,4),X(end,5)]);
         
         % CONTROLADOR
-%         condIni(5) = controlador(condIni);
-        condIni(5) = net(real(X(end,1:4))');
+        condIni(5) = controlador(condIni);
+%         condIni(5) = net(real(X(end,1:4))');
         
 %         % ----------------------------------------------
 %         % Control manual
@@ -171,8 +166,8 @@ while 1
         tau = taux(end) - taux(1);
         
         % CONTROLADOR
-%         xaux(end,5) = controlador(xaux(end,:));
-        xaux(end,5) = net(real(X(end,1:4))');
+        xaux(end,5) = controlador(xaux(end,:));
+%         xaux(end,5) = net(real(X(end,1:4))');
 
 %         % ----------------------------------------------
 %         % Control manual

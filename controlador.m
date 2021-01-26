@@ -2,7 +2,7 @@
 function theta = controlador(x)
 global parabola se e_ant tau control_fuzzy
 
-tipo_control = 4;
+tipo_control = 3;
 
 switch tipo_control
     
@@ -36,9 +36,7 @@ switch tipo_control
         se = real(se + x(1));
         sumaE = real(se*tau);
         x(1) = real(x(1));
-<<<<<<< Updated upstream
         theta = evalfis(control_fuzzy, [x(1) sumaE]);
-=======
         
         if mod(parabola,2) == 1
             theta = evalfis(control_fuzzy, [x(1) sumaE]);
@@ -47,7 +45,6 @@ switch tipo_control
             theta = evalfis(control_fuzzy, [x(1) sumaE]);
             
         end
->>>>>>> Stashed changes
         
     case 4 % Controlador neuro-fuzzy
         
