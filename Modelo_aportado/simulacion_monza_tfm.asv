@@ -3,7 +3,6 @@
 load('dificultad1.mat');
 load('circulos.mat');
 giro_simu=giro_m;
-% giro_simu = 0; %cambio by mua
 ma=cos(giro_simu);
 mb=sin(giro_simu);
 
@@ -15,7 +14,7 @@ anim_giro_pistas;
 %**************************************************************************
 
 fig=figure(1);
-for j=1:length(xs)
+for j=1:1
     plot(mxp(j),myp(j)+0.01,'r*','lineWidth',15)
     
     %*********RECTAS*********
@@ -33,10 +32,9 @@ for j=1:length(xs)
     plot(mx6(j,:),my6(j,:),'b','lineWidth',2);
     plot(mx7(j,:),my7(j,:),'b','lineWidth',2);
       
-    pause(0.1);
-    hold off;
-    MM = getframe(fig);
-    figure(1)
+%     hold off;
+%     MM = getframe(fig);
+%     figure(1)
     plot(r1,r2,'r');
     hold on;
     plot(r3,r4,'r');
