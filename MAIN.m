@@ -43,7 +43,7 @@ X = condIni;
 T = 0;
 parabola = 0;
 tSim = [t_ini, t_fin];
-h = 0.01;
+h = 0.033;
 tau = h;
 
 %% Simulacion
@@ -62,7 +62,7 @@ while 1
         condIni = real([X(end,1),X(end,2),X(end,3),X(end,4),X(end,5)]);
         
         % CONTROLADOR
-        condIni(5) = condIni(5);
+        condIni(5) = -3*condIni(3);
 
         [taux,xaux] = ode45(@SistemaCaida,[0 h],condIni,options1);
         tau = taux(end) - taux(1);
@@ -128,7 +128,7 @@ while 1
         tau = taux(end) - taux(1);
         
         % CONTROLADOR
-        xaux(end,5) = condIni(5);
+        xaux(end,5) = -3*condIni(3);
         
         x1 = xaux(end,1);
         x2 = xaux(end,2);
