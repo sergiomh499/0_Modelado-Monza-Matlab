@@ -15,11 +15,11 @@ global control_fuzzy;
 control_fuzzy = readfis('controlFPI2');
 
 % Lectura del controlador neuronal
-control_fuzzy = readfis('fuzzy_control_net_2');
-control_fuzzy = readfis('NeuroController');
-load('train_net10.mat');
-load('data_net.mat');
-X_data = 1*[x_input,x_output];
+% control_fuzzy = readfis('fuzzy_control_net_2');
+% control_fuzzy = readfis('NeuroController');
+% load('train_net10.mat');
+% load('data_net.mat');
+% X_data = 1*[x_input,x_output];
 
 % Inicializacion variables
 theta = 0;
@@ -29,7 +29,7 @@ se = 0;
 e_ant = 0;
 
 % Parametros
-nivel = 1;
+nivel = 2 ;
 condIni = [-0.1, 0, 0.16, 0, theta];
 g = 9.81;
 
@@ -73,7 +73,6 @@ while 1
         
         % CONTROLADOR
         condIni(5) = controlador(condIni);
-%         condIni(5) = net(real([X(end,1);X(end,2);X(end,3);X(end,4)]));
         
 %         % ----------------------------------------------
 %         % Control manual
@@ -167,7 +166,6 @@ while 1
         
         % CONTROLADOR
         xaux(end,5) = controlador(xaux(end,:));
-%         xaux(end,5) = net(real([X(end,1);X(end,2);X(end,3);X(end,4)]));
 
 %         % ----------------------------------------------
 %         % Control manual
