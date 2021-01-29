@@ -9,17 +9,6 @@ global parabola;
 global g;
 global value;
 global se tau e_ant;
-global control_fuzzy;
-
-% Lectura del controlador fuzzy
-control_fuzzy = readfis('controlFPI2');
-
-% Lectura del controlador neuronal
-% control_fuzzy = readfis('fuzzy_control_net_2');
-% control_fuzzy = readfis('NeuroController');
-% load('train_net10.mat');
-% load('data_net.mat');
-% X_data = 1*[x_input,x_output];
 
 % Inicializacion variables
 theta = 0;
@@ -29,7 +18,7 @@ se = 0;
 e_ant = 0;
 
 % Parametros
-nivel = 2 ;
+nivel = 4;
 condIni = [-0.1, 0, 0.16, 0, theta];
 g = 9.81;
 
@@ -53,7 +42,7 @@ X = condIni;
 T = 0;
 parabola = 0;
 tSim = [t_ini, t_fin];
-h = 0.01;
+h = 0.0033;
 tau = h;
 
 %% Simulacion

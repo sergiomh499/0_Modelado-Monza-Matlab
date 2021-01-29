@@ -1,6 +1,6 @@
 %% CONTROLADOR
 function theta = controlador(x)
-global parabola se e_ant tau control_fuzzy %theta
+global parabola se e_ant tau theta
 
 tipo_control = 4;
 
@@ -53,7 +53,8 @@ switch tipo_control
         
     case 4 % Controlador neuro-fuzzy
         
-        control_fuzzy = readfis('fuzzy_control_net_1');
+        control_fuzzy = readfis('fuzzy_control_net_2');
+%         control_fuzzy = readfis('NeuroController');
         theta = evalfis(control_fuzzy, real([x(1),x(2),x(3),x(4)]));
         
     case 5 % Controlador Neuronal
