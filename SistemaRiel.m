@@ -16,6 +16,7 @@ alpha = atan2(-1.08*xprima,1) + x(5);
 
 % Ecuaciones de estado en sistema inercial
 dx1aux = dxprima;
+% dx2aux = -g*sin(alpha)-0.01/0.007*dxprima;
 dx2aux = -g*sin(alpha)-0.01/0.007*dxprima;
 dx3aux = -1.08*xprima*dxprima;
 dx4aux = 0;

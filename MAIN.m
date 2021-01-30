@@ -18,8 +18,10 @@ se = 0;
 e_ant = 0;
 
 % Parametros
-nivel = 4;
+nivel = 1  ;
 condIni = [-0.1, 0, 0.16, 0, theta];
+condIni_aux = condIni;
+
 g = 9.81;
 
 %% Generar mapa
@@ -41,9 +43,19 @@ options2 = odeset(  'RelTol',1e-4,...
 X = condIni;
 T = 0;
 parabola = 0;
-tSim = [t_ini, t_fin];
-h = 0.0033;
+tSim = [t_ini, t_fin];  
+h = 0.01;
 tau = h;
+yaEntro = 0;
+
+% Translacion condiciones iniciales
+% condIni(5) = controlador(condIni);
+% % condIni(5) = -pi/8;
+% % Translacion de bola al girar
+% x1 = condIni(1);
+% x3 = condIni(3);
+% condIni(1) = x1*cos(condIni(5)) - x3*sin(condIni(5));
+% condIni(3) = x1*sin(condIni(5)) + x3*cos(condIni(5));
 
 %% Simulacion
 tic
@@ -58,10 +70,16 @@ while 1
     while t_aux<t_fin
         
         % Caida de la moneda
-        condIni = real([X(end,1),X(end,2),X(end,3),X(end,4),X(end,5)]);
+        if yaEntro == 1
+            condIni = real([X(end,1),X(end,2),X(end,3),X(end,4),X(end,5)]);
+            % CONTROLADOR
+            condIni(5) = controlador(condIni);
+        else
+            condIni(5) = controlador(condIni_aux);
+            yaEntro=1;
+        end 
         
-        % CONTROLADOR
-        condIni(5) = controlador(condIni);
+        
         
 %         % ----------------------------------------------
 %         % Control manual
@@ -234,8 +252,17 @@ while 1
 end
 toc
 
+%% Simulink
+
+% sim('Monza_simulacion',real(T(end)));
+sim('Monza_simulacion',100);
+
 %% Ploteo
+
+
 drawArrow = @(x,y,Vx,Vy) quiver( x(1),y(1),Vx(2)-Vx(1),Vy(2)-Vy(1),0 );
+
+% Representacion
 
 % Representacion
 figure(1);
@@ -248,6 +275,25 @@ plot(xcir,ycir{1},'k');
 plot(xcir,ycir{2},'k');
 plot(X(:,1),X(:,3),'r');
 plot(X(1,1),X(1,3),'bo');
+hold off
+
+
+% ploteo conjunto
+figure(1);
+[xsim,ysim]=trayectoria.signals.values;
+[xpar, ypar, xcir, ycir] = generarMapa(nivel, X(end,5));
+plot(xsim,ysim,'b--');
+hold on
+plot(X(:,1),X(:,3),'r');
+for i = 1:7
+    plot(xpar{i},ypar{i},'k');
+end
+plot(xcir,ycir{1},'k');
+plot(xcir,ycir{2},'k');
+plot(X(1,1),X(1,3),'bo');
+plot(X(:,1),X(:,3),'r');
+plot(xsim,ysim,'b--');
+legend('Modelo proporcionado','Modelo propio')
 hold off
 
 % % Velocidades

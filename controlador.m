@@ -2,9 +2,12 @@
 function theta = controlador(x)
 global parabola se e_ant tau theta
 
-tipo_control = 4;
+tipo_control = 5;
 
 switch tipo_control
+    
+    case 0
+        theta=-pi/8;
     
     case 1 % Control adaptativo
         
@@ -59,8 +62,8 @@ switch tipo_control
         
     case 5 % Controlador Neuronal
         
-        load('train_net9.mat');
-        theta = net(real([x(1),x(2),x(3),x(4)]'));
+        net = load('train_net9.mat');       
+        theta = net(real(x(1:4)));
         
     otherwise
         return
