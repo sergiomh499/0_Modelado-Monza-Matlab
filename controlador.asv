@@ -62,9 +62,10 @@ switch tipo_control
         
     case 5 % Controlador Neuronal
         
+        %#function network
         net = load('train_net9.mat');  
-        net = net.net;
-        theta = net(real(x(1:4)'));
+%         net = network(net);
+        theta = net(real(x(1:4)));
         
     otherwise
         return

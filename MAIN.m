@@ -18,7 +18,7 @@ se = 0;
 e_ant = 0;
 
 % Parametros
-nivel = 1  ;
+nivel = 3  ;
 condIni = [-0.1, 0, 0.16, 0, theta];
 condIni_aux = condIni;
 
@@ -48,7 +48,7 @@ h = 0.01;
 tau = h;
 yaEntro = 0;
 
-% Translacion condiciones iniciales
+% % Translacion condiciones iniciales
 % condIni(5) = controlador(condIni);
 % % condIni(5) = -pi/8;
 % % Translacion de bola al girar
