@@ -115,7 +115,7 @@ end
 %***************ROTACION DE LA MONEDA**************************
 
 mxp=zeros(1,length(xs));
-for i=1:length(xs)
+for i=1:length(1)
 %     if flag_mov(i)==0
 %       mxp(i)=xs(i)*ma(i)-ys(i)*mb(i);
 %     else

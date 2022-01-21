@@ -1,14 +1,12 @@
 %%
 
-load('dificultad1.mat');
+load('dificultad2.mat');
 load('circulos.mat');
 giro_simu=giro_m;
-% giro_simu = 0; %cambio by mua
 ma=cos(giro_simu);
 mb=sin(giro_simu);
 
 anim_giro_pistas;
-
 
 %**************************************************************************
 %***************GR�FICAS DE LAS CURVAS DE LA SIMULACI�N********************

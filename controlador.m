@@ -2,7 +2,7 @@
 function theta = controlador(x)
 global parabola se e_ant tau theta
 
-tipo_control = 5;
+tipo_control = 1;
 
 switch tipo_control
     

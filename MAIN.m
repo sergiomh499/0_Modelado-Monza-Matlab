@@ -18,7 +18,7 @@ se = 0;
 e_ant = 0;
 
 % Parametros
-nivel = 3  ;
+nivel = 2  ;
 condIni = [-0.1, 0, 0.16, 0, theta];
 condIni_aux = condIni;
 
@@ -44,7 +44,7 @@ X = condIni;
 T = 0;
 parabola = 0;
 tSim = [t_ini, t_fin];  
-h = 0.01;
+h = 0.033;
 tau = h;
 yaEntro = 0;
 
@@ -259,10 +259,7 @@ sim('Monza_simulacion',100);
 
 %% Ploteo
 
-
 drawArrow = @(x,y,Vx,Vy) quiver( x(1),y(1),Vx(2)-Vx(1),Vy(2)-Vy(1),0 );
-
-% Representacion
 
 % Representacion
 figure(1);
@@ -282,7 +279,7 @@ hold off
 figure(1);
 [xsim,ysim]=trayectoria.signals.values;
 [xpar, ypar, xcir, ycir] = generarMapa(nivel, X(end,5));
-plot(xsim,ysim,'b--');
+plot(xs,ys,'b--');
 hold on
 plot(X(:,1),X(:,3),'r');
 for i = 1:7
@@ -292,7 +289,7 @@ plot(xcir,ycir{1},'k');
 plot(xcir,ycir{2},'k');
 plot(X(1,1),X(1,3),'bo');
 plot(X(:,1),X(:,3),'r');
-plot(xsim,ysim,'b--');
+plot(xs,ys,'b--');
 legend('Modelo proporcionado','Modelo propio')
 hold off
 
@@ -328,29 +325,29 @@ hold off
 % end
 % hold off
 
-for j = 1:length(T)-1
-    [xpar, ypar, xcir, ycir] = generarMapa(nivel, X(j,5));
-    
-    xpar_plot_1(:,j) = xpar{1};
-    xpar_plot_2(:,j) = xpar{2};
-    xpar_plot_3(:,j) = xpar{3};
-    xpar_plot_4(:,j) = xpar{4};
-    xpar_plot_5(:,j) = xpar{5};
-    xpar_plot_6(:,j) = xpar{6};
-    xpar_plot_7(:,j) = xpar{7};
-    
-    ypar_plot_1(:,j) = ypar{1};
-    ypar_plot_2(:,j) = ypar{2};
-    ypar_plot_3(:,j) = ypar{3};
-    ypar_plot_4(:,j) = ypar{4};
-    ypar_plot_5(:,j) = ypar{5};
-    ypar_plot_6(:,j) = ypar{6};
-    ypar_plot_7(:,j) = ypar{7};
-end
-
-
-% Representacion modelo dinamico
-
+% for j = 1:length(T)-1
+%     [xpar, ypar, xcir, ycir] = generarMapa(nivel, X(j,5));
+%     
+%     xpar_plot_1(:,j) = xpar{1};
+%     xpar_plot_2(:,j) = xpar{2};
+%     xpar_plot_3(:,j) = xpar{3};
+%     xpar_plot_4(:,j) = xpar{4};
+%     xpar_plot_5(:,j) = xpar{5};
+%     xpar_plot_6(:,j) = xpar{6};
+%     xpar_plot_7(:,j) = xpar{7};
+%     
+%     ypar_plot_1(:,j) = ypar{1};
+%     ypar_plot_2(:,j) = ypar{2};
+%     ypar_plot_3(:,j) = ypar{3};
+%     ypar_plot_4(:,j) = ypar{4};
+%     ypar_plot_5(:,j) = ypar{5};
+%     ypar_plot_6(:,j) = ypar{6};
+%     ypar_plot_7(:,j) = ypar{7};
+% end
+% 
+% 
+% % Representacion modelo dinamico
+% 
 % fig=figure(1);
 % for j = 1:length(T)-1
 %     
